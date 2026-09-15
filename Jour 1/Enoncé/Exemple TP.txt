@@ -1,0 +1,94 @@
+# Exemples de livrables — format attendu
+
+⚠️ Ces exemples portent sur un cas différent du vôtre (un service de réservation de salles), donnés uniquement pour illustrer le **format** attendu. Ne les recopiez pas.
+
+---
+
+## Exemple `p1-csi-register.md`
+
+```markdown
+## Constats par dimension
+
+- **Organisations & personnes** : un seul agent gère les réservations, aucun backup en cas d'absence
+- **Information & technologie** : le planning est tenu sur un fichier Excel partagé, pas de synchronisation temps réel
+- **Partenaires & fournisseurs** : le prestataire de vidéoprojecteurs met 3 jours à répondre en cas de panne
+- **Value Streams & processus** : aucune procédure écrite pour annuler/modifier une réservation
+
+## CSI Register
+
+| Amélioration | Effort | Impact | Priorité |
+|---|---|---|---|
+| Passer sur un outil de réservation partagé en ligne | Faible | Fort | 1 |
+| Rédiger une procédure d'annulation/modification | Faible | Moyen | 2 |
+| Former un second agent en backup | Moyen | Fort | 3 |
+
+## Principe directeur mobilisé
+
+"Progresser de manière itérative avec du feedback" : on commence par l'outil en ligne (faible effort, correction immédiate du principal irritant) avant d'investir dans la formation d'un second agent (effort plus lourd, à valider une fois le premier gain observé).
+```
+
+---
+
+## Exemple `p2-slm-events.md`
+
+```markdown
+## SLA / SLO proposés
+
+- SLA priorité critique : confirmation de réservation sous 30 min — SLO : 95% des demandes critiques traitées dans ce délai
+- SLA priorité normale : confirmation sous 4h — SLO : 90% de respect
+
+## Classification des logs
+
+| Log | Classification | Justification | Action |
+|---|---|---|---|
+| Connexion agent réussie | Informational | Aucune anomalie | Aucune |
+| Espace disque serveur planning à 85% (seuil 80%) | Warning | Seuil dépassé, pas d'impact immédiat | Purge des anciens fichiers planifiée |
+| Serveur de réservation injoignable 6 min | Exception | Service indisponible, impact utilisateur direct | Ouverture d'un Incident |
+```
+
+---
+
+## Exemple `p3-change-kb.md`
+
+```markdown
+## RFC — Migration vers outil de réservation en ligne
+
+- **Type** : Normal (nécessite évaluation, impact sur les habitudes de tous les utilisateurs)
+- **Impact** : tous les agents et utilisateurs internes ; risque de perte de données lors de la migration du fichier Excel
+- **Plan de rollback** : conservation du fichier Excel en lecture seule pendant 2 semaines, retour possible en cas d'échec de migration
+- **Validation CAB simulée** :
+  - Demandeur : "Le gain de fiabilité justifie le changement dès ce mois-ci"
+  - Approbateur : "Il faut d'abord valider la migration des 3 derniers mois de données avant tout déploiement"
+
+## Article de base de connaissance
+
+- **Symptôme** : double réservation de la même salle sur le même créneau
+- **Cause** : absence de verrouillage en temps réel sur le fichier Excel partagé
+- **Résolution** : migration vers l'outil en ligne avec verrouillage automatique des créneaux
+- **Mots-clés** : double réservation, conflit créneau, planning partagé
+
+## Positionnement dans le Product and Service Lifecycle
+
+Ce changement mobilise principalement les étapes **Build** (paramétrage du nouvel outil) et **Transition** (bascule et formation des agents). Un lien avec **Design** est justifié : le workflow de réservation est repensé, pas seulement remplacé à l'identique.
+```
+
+---
+
+## Exemple `README.md`
+
+```markdown
+# Synthèse — TP ITIL 5
+
+| Partie | Pratique(s) mobilisée(s) |
+|---|---|
+| 1 | Continual Improvement |
+| 2 | Service Level Management, Event Management |
+| 3 | Change Enablement, Knowledge Management |
+| 4 | Service Request Management |
+
+## Principe directeur le plus structurant
+"Se concentrer sur la valeur" : chaque amélioration a été évaluée selon son bénéfice réel pour l'utilisateur final (éviter les doubles réservations), pas selon la préférence technique de l'équipe IT.
+
+## AI Governance / 6C
+Non pertinent dans l'état actuel du cas : aucune décision automatisée n'est en jeu. Un futur système de suggestion automatique de créneaux relèverait en revanche du modèle 6C, avec une question de gouvernance sur qui valide les suggestions de l'IA en cas d'erreur.
+```

@@ -1,0 +1,106 @@
+# TP ITIL 5 — Amélioration d'un service (helpdesk interne)
+
+## Contexte
+Le service helpdesk interne de l'entreprise reçoit des plaintes récurrentes : lenteur de traitement, tickets perdus, utilisateurs qui rappellent plusieurs fois pour le même problème. Vous êtes chargé d'analyser ce service et de proposer/mettre en œuvre une amélioration en appliquant le framework ITIL 5 (référentiel de bonnes pratiques de gestion des services informatiques, publié par PeopleCert en février 2026, qui succède à ITIL 4).
+
+## Modalités
+- Repo GitHub `tp-itil5-<nom>`, 2 commits minimum par partie (`pN: <action>`), tout en fichiers texte (aucune capture d'écran).
+- Chaque livrable doit être exploitable par un tiers sans contexte oral — pas de raccourcis type "on a vu en cours que...".
+- Durée indicative : 4 demi-journées, une partie par demi-journée.
+
+---
+
+## Partie 1 — Diagnostic (4 dimensions + Continual Improvement)
+
+### Objectif
+Identifier pourquoi le service dysfonctionne, sans se précipiter sur une solution technique.
+
+### Travail attendu
+- Analysez le dysfonctionnement sous les **4 dimensions** du service (cadre ITIL qui garantit une analyse complète, au-delà du seul aspect technique) :
+  - Organisations & personnes (rôles, compétences, charge de travail)
+  - Information & technologie (outils, données, systèmes utilisés)
+  - Partenaires & fournisseurs (dépendances externes)
+  - Value Streams & processus (flux de travail, étapes du traitement d'un ticket)
+- Pour chaque dimension, rédigez un constat factuel (pas une généralité) appuyé sur un ou plusieurs symptômes du contexte donné.
+- Ouvrez un **CSI Register** (Continual Service Improvement Register — registre listant les améliorations identifiées, pratique de la discipline "Continual Improvement") : proposez 3 améliorations concrètes, chacune évaluée en effort (faible/moyen/fort) et impact (faible/moyen/fort), avec une priorisation justifiée.
+- Identifiez lequel des **7 principes directeurs** ITIL (règles de bonne conduite transverses : ex. "Se concentrer sur la valeur", "Progresser de manière itérative avec du feedback", "Collaborer et promouvoir la visibilité") a le plus guidé votre priorisation, et pourquoi.
+
+### Livrable
+`p1-csi-register.md` : constats par dimension, CSI Register priorisé, principe directeur mobilisé + justification.
+
+---
+
+## Partie 2 — Pilotage du service (Service Level Management + Event Management)
+
+### Objectif
+Définir comment on mesure la qualité du service et comment on détecte les anomalies avant qu'elles ne deviennent des incidents.
+
+### Travail attendu
+- Proposez 2 **SLA** (Service Level Agreement — engagement contractuel/formel sur le niveau de service rendu) pour le helpdesk, déclinés par niveau de priorité (ex : délai de première réponse, délai de résolution).
+- Pour chaque SLA, précisez au moins un **SLO** associé (Service Level Objective — objectif de performance mesurable qui compose le SLA, ex : "99% des tickets critiques répondus en moins d'1h").
+- Classez les 5 logs fournis (voir `logs.txt` ci-dessous) selon la pratique **Event Management** (surveillance et interprétation des signaux système) :
+  - **Informational** : événement normal, aucune action
+  - **Warning** : seuil approché, action préventive
+  - **Exception** : anomalie avérée, action immédiate (souvent ouverture d'un Incident)
+- Pour chaque log classé Exception ou Warning, indiquez l'action concrète à déclencher.
+
+### Ressource — `logs.txt`
+
+[2026-09-10 08:12:03] AUTH user=jdupont action=login status=success host=WKS-042
+[2026-09-10 09:45:17] DISK host=SRV-FILE01 usage=82% threshold=80%
+[2026-09-10 11:03:55] SVC name=helpdesk-portal status=unreachable duration=00:04:12
+[2026-09-10 14:20:41] BACKUP job=nightly-backup host=SRV-DB01 status=completed size=45GB
+[2026-09-10 16:58:29] NET link=switch-3F-port12 status=down flapping=true count=6/10min
+
+
+### Livrable
+`p2-slm-events.md` : 2 SLA + SLO associés, classification des 5 logs + actions.
+
+---
+
+## Partie 3 — Traitement du changement (Change Enablement + Knowledge Management + Product and Service Lifecycle)
+
+### Objectif
+Transformer une amélioration identifiée en changement contrôlé, documenté et positionné dans le nouveau modèle ITIL 5.
+
+### Travail attendu
+- Rédigez une **RFC** (Request For Change — demande formelle de changement, document qui déclenche la pratique Change Enablement) pour une des 3 améliorations retenues en Partie 1.
+  - Classez le type de changement : standard (pré-approuvé, faible risque), normal (nécessite évaluation), ou urgent (risque élevé, procédure accélérée) — avec justification.
+  - Incluez une analyse d'impact (qui est affecté, quel risque de régression) et un plan de rollback (retour arrière) concret, pas générique.
+  - Simulez une validation par un **CAB** (Change Advisory Board — comité consultatif qui évalue et approuve les changements à risque) : argumentez les deux rôles, demandeur ET approbateur.
+- Rédigez un article de **base de connaissance** (pratique Knowledge Management) au format : Symptôme / Cause / Résolution / Mots-clés — exploitable par un futur technicien sans contexte.
+- Situez votre RFC dans le **Product and Service Lifecycle** (modèle en 8 étapes qui remplace la Service Value Chain d'ITIL 4 : Discover, Design, Acquire, Build, Transition, Operate, Deliver, Support). Précisez :
+  - Quelle(s) étape(s) sont mobilisées par votre changement (généralement Build et/ou Transition pour une correction de service existant, éventuellement Design si le workflow est repensé)
+  - Pourquoi ce modèle n'est pas un enchaînement strictement linéaire (les étapes peuvent se chevaucher selon le contexte)
+
+### Livrable
+`p3-change-kb.md` : RFC complète, article KB, positionnement dans le Product and Service Lifecycle.
+
+---
+
+## Partie 4 — Clôture (Service Request Management + synthèse)
+
+### Objectif
+Boucler le cas par un traitement opérationnel et prendre du recul sur l'ensemble de la démarche.
+
+### Travail attendu
+- Traitez une demande de service GLPI liée au changement (relève de la pratique **Service Request Management**, distincte d'un Incident car il s'agit d'une demande planifiée et non d'une panne). Copiez les champs clés du ticket (titre, description, statut, dates) — pas de capture d'écran.
+- Rédigez le `README.md` de synthèse, incluant :
+  - Un tableau récapitulatif : partie → pratique(s) ITIL 5 mobilisée(s)
+  - Le principe directeur le plus structurant sur l'ensemble du cas, justifié par un exemple concret tiré du TP
+  - Un point critique sur l'apport (ou l'absence d'apport) du module **AI Governance** (extension d'ITIL 5 dédiée à la gouvernance de l'intelligence artificielle) et du modèle **6C** (référentiel de capacités IA introduit dans ce module) sur votre cas précis — refuser une réponse vague type "l'IA c'est important", exiger un exemple concret ou une justification de non-pertinence
+
+### Livrable
+`README.md` final.
+
+---
+
+## Évaluation
+- Cohérence de l'analyse 4 dimensions + pertinence du CSI Register (Continual Service Improvement Register)
+- Pertinence des SLA/SLO et exactitude de la classification des événements
+- Qualité de la RFC (Request For Change) et de l'article KB (Knowledge Base) + exactitude du positionnement dans le Product and Service Lifecycle (pas de confusion avec l'ancienne Service Value Chain d'ITIL 4)
+- Clarté du README final + vocabulaire ITIL 5 à jour et correctement utilisé
+- Régularité et clarté des commits GitHub
+
+## Barème indicatif
+Partie 1 : 20% — Partie 2 : 20% — Partie 3 : 30% — Partie 4 : 30%
