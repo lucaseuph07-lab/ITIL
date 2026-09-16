@@ -1,0 +1,113 @@
+TP ITIL/GLPI — "Une journée chez NORTEK SI"
+=====================================================
+CONTEXTE
+=====================================================
+Vous êtes technicien support IT chez NORTEK SI (200 salariés, 1 DSI de 4 personnes).
+On est lundi matin. La journée va enchaîner un incident, un problème récurrent,
+un changement, une mise à jour de CMDB et une arrivée de collaborateur.
+Vous traitez tout dans GLPI, dans l'ordre chronologique, en respectant les bonnes
+pratiques ITIL vues en cours.
+
+=====================================================
+PHASE 1 : GESTION DES INCIDENTS
+=====================================================
+En 20 minutes, 5 tickets arrivent :
+1. Le serveur de messagerie ne répond plus (toute l'entreprise).
+2. Une souris ne fonctionne plus (comptabilité).
+3. Un collaborateur signale un email suspect demandant ses identifiants.
+4. L'imprimante du 2e étage est hors service.
+5. Le DAF (VIP) n'arrive plus à ouvrir son tableau de bord financier.
+
+Consignes :
+- Créez les 5 tickets dans GLPI.
+- Pour chacun : catégorisez (incident/demande), évaluez impact et urgence,
+  déduisez la priorité (matrice impact/urgence) et le SLA associé.
+- Traitez-les dans l'ordre de priorité justifié, pas dans l'ordre d'arrivée.
+- Le ticket n°3 doit être qualifié correctement (indice : ce n'est pas un
+  incident technique classique).
+
+Livrable : les 5 tickets créés et priorisés dans GLPI + une ligne de justification
+par ticket (pourquoi cette priorité).
+
+=====================================================
+PHASE 2 : GESTION DES PROBLÈMES
+=====================================================
+En reprenant l'historique GLPI, vous constatez que le ticket "serveur mail HS"
+est le 3e incident similaire en 2 semaines (lenteur puis coupure du serveur mail).
+
+Consignes :
+- Créez un Problème dans GLPI et liez-y les 3 incidents concernés.
+- Menez une recherche de cause racine (méthode des 5 pourquoi, à rédiger).
+- Proposez un workaround immédiat pour limiter l'impact en attendant la
+  résolution définitive.
+- Documentez la cause connue dans la base de connaissances (KEDB) de GLPI.
+
+Livrable : fiche Problème GLPI + 5 pourquoi + workaround + entrée KEDB.
+
+=====================================================
+PHASE 3 : GESTION DES CHANGEMENTS
+=====================================================
+La cause racine identifiée en phase 2 nécessite une mise à jour critique du
+serveur de messagerie. Le fournisseur a livré un correctif.
+
+Consignes :
+- Rédigez une RFC (Request for Change) : description, risques, impact,
+  plan de rollback, fenêtre de maintenance proposée.
+- Simulez une validation CAB (avis favorable/défavorable argumenté).
+- Créez le changement dans GLPI et liez-le au Problème et aux incidents
+  de la phase 1 et 2.
+
+Livrable : RFC rédigée + changement tracé et lié dans GLPI.
+
+=====================================================
+PHASE 4 : GESTION DES CONFIGURATIONS (CMDB)
+=====================================================
+Le changement va être appliqué sur le serveur mail. Avant intervention,
+vous devez sécuriser la vision d'impact.
+
+Consignes :
+- Dans GLPI, localisez ou créez la fiche CI du serveur mail.
+- Identifiez et documentez les CI liés (dépendances : annuaire, sauvegarde,
+  postes clients concernés).
+- Simulez l'impact d'une panne du serveur mail sur ces CI enfants et listez
+  les services/utilisateurs impactés.
+
+Livrable : fiche CI serveur mail + liste des CI dépendants + note d'impact.
+
+=====================================================
+PHASE 5 : GESTION DES DEMANDES DE SERVICE
+=====================================================
+Pendant que le changement est en cours de planification, un nouvel employé
+(Julie, chargée de communication) arrive lundi prochain. Le manager envoie
+sa demande d'onboarding IT.
+
+Consignes :
+- Créez une Demande de service (Service Request) dans GLPI, distincte
+  d'un incident.
+- Déroulez le catalogue de services fictif fourni ci-dessous et cochez
+  les éléments à traiter :
+    - Création compte utilisateur + boîte mail
+    - Attribution poste + périphériques
+    - Accès VPN
+    - Accès au dossier partagé "Communication"
+- Indiquez le SLA de demande de service (différent du SLA incident) et
+  la date cible de mise à disposition.
+
+Livrable : ticket Service Request GLPI complet, avec SLA et échéance.
+
+=====================================================
+LIVRABLE FINAL À RENDRE
+=====================================================
+- GLPI des 5 phases avec liens entre tickets visibles.
+- Un document texte récapitulatif reprenant, pour chaque phase, vos choix
+  et justifications (1 paragraphe par phase maximum).
+
+=====================================================
+GRILLE D'ÉVALUATION (/20)
+=====================================================
+- Phase 1 — Incidents : priorisation correcte et justifiée ......... /4
+- Phase 2 — Problème : lien incidents/cause racine/KEDB ............ /4
+- Phase 3 — Changement : RFC complète + traçabilité GLPI ........... /4
+- Phase 4 — CMDB : relations CI et analyse d'impact ................ /4
+- Phase 5 — Service Request : distinction incident/demande + SLA .... /3
+- Cohérence globale du fil rouge (liens entre tickets dans GLPI) .... /1
