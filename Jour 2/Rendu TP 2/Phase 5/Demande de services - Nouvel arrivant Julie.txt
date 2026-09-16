@@ -1,0 +1,29 @@
+# Phase 5 — Demande de service (onboarding Julie)
+
+## Ticket GLPI
+
+Champ	Valeur
+Type	Demande
+Titre	Onboarding IT — Julie, chargée de communication
+Catégorie	Ressources humaines / Arrivée collaborateur
+Description	Le manager de Julie (chargée de communication) demande la préparation complète du poste de travail pour son arrivée lundi prochain.
+Urgence	Moyenne
+Impact	Faible (concerne une seule personne)
+Priorité	Normale
+Demandeur	Manager du service Communication
+Attribué à	Équipe support N1/N2
+Statut	Nouveau → En cours de traitement → Clôturé
+Date d'ouverture	Aujourd'hui
+Date cible de mise à disposition	Lundi prochain (jour d'arrivée)
+
+
+## Éléments du catalogue de services à traiter
+
+☐ Création du compte utilisateur + boîte mail (j.prenom@nortek-si.fr)
+☐ Déploiement d'un poste complet (PC + périphériques : écran, clavier, souris)
+☐ Attribution des accès VPN
+☐ Accès au dossier partagé "Communication"
+
+
+## SLA de demande de service
+Contrairement à un incident (résolution en quelques heures), une demande de service standard comme un onboarding suit un SLA de 3 à 5 jours ouvrés. Ici, la demande arrivant quelques jours avant l'arrivée de Julie, la date cible est fixée à lundi matin, ce qui reste dans les délais du SLA.
